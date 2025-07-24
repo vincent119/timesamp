@@ -1,0 +1,30 @@
+{
+  "app.short": "A powerful timestamp conversion tool",
+  "app.long": "timestamp is a feature-rich timestamp conversion tool that supports:\\n\\n• Automatic detection of multiple time formats\\n• Unix timestamps (seconds/milliseconds/microseconds/nanoseconds)\\n• RFC3339, ISO8601 and other standard formats\\n• Custom format conversion\\n• Timezone support\\n• Relative time calculations\\n\\nExamples:\\n  timestamp 1640995200                    # Unix timestamp conversion\\n  timestamp \\\"2022-01-01 12:00:00\\\"         # String format conversion\\n  timestamp -o rfc3339 1640995200         # Specify output format\\n  timestamp -i \\\"2006-01-02\\\" \\\"2022-01-01\\\"  # Specify input format",
+
+  "now.short": "Show current time in various formats",
+  "now.long": "Display current time in various formats including Unix timestamps and common date-time formats\\n\\nSupported relative time offsets:\\n- s: seconds (e.g., +30s, -10s)\\n- m: minutes (e.g., +5m, -15m)\\n- h: hours (e.g., +2h, -3h)\\n- d: days (e.g., +1d, -7d)\\n- w: weeks (e.g., +1w, -2w)\\n- M: months (e.g., +1M, -6M)\\n- y: years (e.g., +1y, -2y)\\n\\nExamples:\\n  timestamp now                  # Current time\\n  timestamp now --offset +1d     # Tomorrow same time\\n  timestamp now --offset -1d     # Yesterday same time\\n  timestamp now --offset +1w     # Next week same time",
+  "now.flag.offset": "Time offset (e.g., +1d, -1w, +2M)",
+
+  "completion.short": "Generate auto-completion scripts",
+  "completion.long": "Generate auto-completion script for the specified shell\\n\\nSupported shells:\\n- bash\\n- zsh\\n- fish\\n- powershell\\n\\nInstallation:\\n\\nBash:\\n  timestamp completion bash > timestamp-completion.bash\\n  source timestamp-completion.bash\\n\\nZsh:\\n  timestamp completion zsh > _timestamp\\n  # Place in your completion directory\\n\\nFish:\\n  timestamp completion fish > ~/.config/fish/completions/timestamp.fish\\n\\nPowerShell:\\n  timestamp completion powershell | Out-String | Invoke-Expression",
+
+  "error": "Error",
+  "error.createConverter": "Failed to create converter",
+  "error.convert": "Conversion failed",
+  "error.unsupportedFormat": "Unsupported format",
+  "error.timeOffset": "Time offset calculation failed",
+
+  "flag.inputFormat": "Specify input format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)",
+  "flag.outputFormat": "Specify output format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)",
+  "flag.timezone": "Specify timezone (e.g., UTC, Asia/Taipei)",
+  "flag.json": "Output in JSON format",
+  "flag.language": "Language setting (en, zh-TW, zh-CN, ja)",
+
+  "output.original": "Original Input",
+  "output.detected": "Detected Format",
+  "output.converted": "Converted",
+  "output.unix": "Unix Timestamp",
+  "output.weekday": "Weekday",
+  "output.timezone": "Timezone"
+}
