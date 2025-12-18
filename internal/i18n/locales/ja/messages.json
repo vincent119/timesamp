@@ -1,80 +1,50 @@
-{
-  "app.short": "強力なタイムスタンプ変換ツール",
-  "app.long": "timestampは、多機能なタイムスタンプ変換ツールです：\n\n• 複数の時間形式の自動検出\n• Unix タイムスタンプ (秒/ミリ秒/マイクロ秒/ナノ秒)\n• RFC3339、ISO8601およびその他の標準形式\n• カスタム形式変換\n• タイムゾーンサポート\n• 相対時間計算\n\n例:\n  timestamp 1640995200                    # Unix タイムスタンプ変換\n  timestamp \"2022-01-01 12:00:00\"         # 文字列形式変換\n  timestamp -o rfc3339 1640995200         # 出力形式を指定\n  timestamp -i \"2006-01-02\" \"2022-01-01\"  # 入力形式を指定",
-
-  "now.short": "現在時刻を様々な形式で表示",
-  "now.long": "Unix タイムスタンプや一般的な日時形式を含む、現在時刻を様々な形式で表示\n\nサポートされている相対時間オフセット:\n- s: 秒 (例: +30s, -10s)\n- m: 分 (例: +5m, -15m)\n- h: 時間 (例: +2h, -3h)\n- d: 日 (例: +1d, -7d)\n- w: 週 (例: +1w, -2w)\n- M: 月 (例: +1M, -6M)\n- y: 年 (例: +1y, -2y)\n\n例:\n  timestamp now                  # 現在時刻\n  timestamp now --offset +1d     # 明日の同時刻\n  timestamp now --offset -1d     # 昨日の同時刻\n  timestamp now --offset +1w     # 来週の同時刻",
-
-  "now.flag.offset": "時間オフセット (例: +1d, -1w, +2M)",
-
-  "now.offset.1s_after": "1秒後",
-  "now.offset.1s_before": "1秒前",
-  "now.offset.30s_after": "30秒後",
-  "now.offset.30s_before": "30秒前",
-  "now.offset.1m_after": "1分後",
-  "now.offset.1m_before": "1分前",
-  "now.offset.5m_after": "5分後",
-  "now.offset.5m_before": "5分前",
-  "now.offset.1h_after": "1時間後",
-  "now.offset.1h_before": "1時間前",
-  "now.offset.2h_after": "2時間後",
-  "now.offset.2h_before": "2時間前",
-  "now.offset.1d_after": "1日後 (明日)",
-  "now.offset.1d_before": "1日前 (昨日)",
-  "now.offset.7d_after": "7日後",
-  "now.offset.7d_before": "7日前",
-  "now.offset.1w_after": "1週間後",
-  "now.offset.1w_before": "1週間前",
-  "now.offset.2w_after": "2週間後",
-  "now.offset.2w_before": "2週間前",
-  "now.offset.1M_after": "1ヶ月後",
-  "now.offset.1M_before": "1ヶ月前",
-  "now.offset.3M_after": "3ヶ月後",
-  "now.offset.3M_before": "3ヶ月前",
-  "now.offset.6M_after": "6ヶ月後",
-  "now.offset.6M_before": "6ヶ月前",
-  "now.offset.1y_after": "1年後",
-  "now.offset.1y_before": "1年前",
-
-  "completion.short": "シェル補完スクリプトを生成",
-  "completion.long": "指定されたシェル用の自動補完スクリプトを生成\n\nサポートされているシェル:\n- bash\n- zsh\n- fish\n- powershell\n\nインストール:\n\nBash:\n  timestamp completion bash > timestamp-completion.bash\n  source timestamp-completion.bash\n\nZsh:\n  timestamp completion zsh > _timestamp\n  # 補完ディレクトリに配置\n\nFish:\n  timestamp completion fish > ~/.config/fish/completions/timestamp.fish\n\nPowerShell:\n  timestamp completion powershell | Out-String | Invoke-Expression",
-
-  "error": "エラー",
-  "error.createConverter": "コンバータの作成に失敗しました",
-  "error.convert": "変換に失敗しました",
-  "error.unsupportedFormat": "サポートされていない形式",
-  "error.timeOffset": "時間オフセットの計算に失敗しました",
-
-  "flag.inputFormat": "入力形式を指定 (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)",
-  "flag.outputFormat": "出力形式を指定 (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)",
-  "flag.timezone": "タイムゾーンを指定 (例: UTC, Asia/Tokyo)",
-  "flag.json": "JSON形式で出力",
-  "flag.language": "言語設定 (en, zh-TW, zh-CN, ja)",
-
-  "output.original": "元の入力",
-  "output.detected": "検出された形式",
-  "output.converted": "変換済み",
-  "output.unix": "Unix タイムスタンプ",
-  "output.weekday": "曜日",
-  "output.timezone": "タイムゾーン",
-
-  "format.unix.seconds": "Unix 秒タイムスタンプ",
-  "format.unix.milliseconds": "Unix ミリ秒タイムスタンプ",
-  "format.unix.microseconds": "Unix マイクロ秒タイムスタンプ",
-  "format.unix.nanoseconds": "Unix ナノ秒タイムスタンプ",
-  "format.rfc3339": "RFC3339 形式",
-  "format.rfc3339.nano": "RFC3339Nano 形式",
-  "format.datetime": "日時形式",
-  "format.date": "日付形式",
-  "format.time": "時刻形式",
-  "format.unknown": "不明な形式",
-
-  "weekday.sunday": "日曜日",
-  "weekday.monday": "月曜日",
-  "weekday.tuesday": "火曜日",
-  "weekday.wednesday": "水曜日",
-  "weekday.thursday": "木曜日",
-  "weekday.friday": "金曜日",
-  "weekday.saturday": "土曜日",
-  "weekday.unknown": "不明"
-}
+[
+  {
+    "id": "cmd.root.short",
+    "translation": "タイムスタンプ変換ツール"
+  },
+  {
+    "id": "cmd.root.long",
+    "translation": "強力なタイムスタンプ変換 CLI ツール、タイムゾーンと相対時間計算をサポート\n\nサポートする形式:\n- Unix タイムスタンプ (秒、ミリ秒、マイクロ秒、ナノ秒)\n- RFC3339 形式\n- 日付時刺形式 (YYYY-MM-DD HH:MM:SS)\n- 日付形式 (YYYY-MM-DD)\n- 時刻形式 (HH:MM:SS)"
+  },
+  {
+    "id": "cmd.now.short",
+    "translation": "現在時刻を様々な形式で表示"
+  },
+  {
+    "id": "cmd.now.long",
+    "translation": "Unix タイムスタンプや一般的な日時形式を含む様々な形式で現在時刻を表示\n\n相対時間オフセットのサポート:\n- s: 秒 (例: +30s, -10s)\n- m: 分 (例: +5m, -15m)\n- h: 時間 (例: +2h, -3h)\n- d: 日 (例: +1d, -7d)\n- w: 週 (例: +1w, -2w)\n- M: 月 (例: +1M, -6M)\n- y: 年 (例: +1y, -2y)"
+  },
+  {
+    "id": "cmd.completion.short",
+    "translation": "shell 自動補完スクリプトを生成"
+  },
+  {
+    "id": "cmd.completion.long",
+    "translation": "指定された shell の自動補完スクリプトを生成"
+  },
+  {
+    "id": "flag.timezone",
+    "translation": "タイムゾーンを指定 (例: UTC, Asia/Tokyo)"
+  },
+  {
+    "id": "flag.offset",
+    "translation": "時間オフセット (例: +1d, -1w, +2M)"
+  },
+  {
+    "id": "flag.json",
+    "translation": "JSON 形式で出力"
+  },
+  {
+    "id": "flag.input.format",
+    "translation": "入力形式を指定 (unix-s, unix-ms, unix-us, unix-ns, rfc3339, datetime, date, time)"
+  },
+  {
+    "id": "flag.output.format",
+    "translation": "出力形式を指定 (unix-s, unix-ms, unix-us, unix-ns, rfc3339, datetime, date, time)"
+  },
+  {
+    "id": "flag.language",
+    "translation": "言語設定 (en, zh-TW, zh-CN, ja)"
+  }
+]

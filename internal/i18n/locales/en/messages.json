@@ -1,75 +1,50 @@
-{
-  "now.short": "Show current time in various formats",
-  "now.long": "Display current time in various formats including Unix timestamps and common date-time formats\\n\\nSupported relative time offsets:\\n- s: seconds (e.g., +30s, -10s)\\n- m: minutes (e.g., +5m, -15m)\\n- h: hours (e.g., +2h, -3h)\\n- d: days (e.g., +1d, -7d)\\n- w: weeks (e.g., +1w, -2w)\\n- M: months (e.g., +1M, -6M)\\n- y: years (e.g., +1y, -2y)\\n\\nExamples:\\n  timestamp now                  # Current time\\n  timestamp now --offset +1d     # Tomorrow same time\\n  timestamp now --offset -1d     # Yesterday same time\\n  timestamp now --offset +1w     # Next week same time",
-
-  "now.flag.offset": "Time offset (e.g., +1d, -1w, +2M)",
-
-  "now.offset.1s_after": "1 second later",
-  "now.offset.1s_before": "1 second ago",
-  "now.offset.30s_after": "30 seconds later",
-  "now.offset.30s_before": "30 seconds ago",
-  "now.offset.1m_after": "1 minute later",
-  "now.offset.1m_before": "1 minute ago",
-  "now.offset.5m_after": "5 minutes later",
-  "now.offset.5m_before": "5 minutes ago",
-  "now.offset.1h_after": "1 hour later",
-  "now.offset.1h_before": "1 hour ago",
-  "now.offset.2h_after": "2 hours later",
-  "now.offset.2h_before": "2 hours ago",
-  "now.offset.1d_after": "1 day later (tomorrow)",
-  "now.offset.1d_before": "1 day ago (yesterday)",
-  "now.offset.7d_after": "7 days later",
-  "now.offset.7d_before": "7 days ago",
-  "now.offset.1w_after": "1 week later",
-  "now.offset.1w_before": "1 week ago",
-  "now.offset.2w_after": "2 weeks later",
-  "now.offset.2w_before": "2 weeks ago",
-  "now.offset.1M_after": "1 month later",
-  "now.offset.1M_before": "1 month ago",
-  "now.offset.3M_after": "3 months later",
-  "now.offset.3M_before": "3 months ago",
-  "now.offset.6M_after": "6 months later",
-  "now.offset.6M_before": "6 months ago",
-  "now.offset.1y_after": "1 year later",
-  "completion.short": "Generate auto-completion scripts",
-  "completion.long": "Generate auto-completion script for the specified shell\\n\\nSupported shells:\\n- bash\\n- zsh\\n- fish\\n- powershell\\n\\nInstallation:\\n\\nBash:\\n  timestamp completion bash > timestamp-completion.bash\\n  source timestamp-completion.bash\\n\\nZsh:\\n  timestamp completion zsh > _timestamp\\n  # Place in your completion directory\\n\\nFish:\\n  timestamp completion fish > ~/.config/fish/completions/timestamp.fish\\n\\nPowerShell:\\n  timestamp completion powershell | Out-String | Invoke-Expression",
-
-  "error": "Error",
-  "error.createConverter": "Failed to create converter",
-  "error.convert": "Conversion failed",
-  "error.unsupportedFormat": "Unsupported format",
-  "error.timeOffset": "Time offset calculation failed",
-
-  "flag.inputFormat": "Specify input format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)",
-  "flag.outputFormat": "Specify output format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)",
-  "flag.timezone": "Specify timezone (e.g., UTC, Asia/Taipei)",
-  "flag.json": "Output in JSON format",
-  "flag.language": "Language setting (en, zh-TW, zh-CN, ja)",
-
-  "output.original": "Original Input",
-  "output.detected": "Detected Format",
-  "output.converted": "Converted",
-  "output.unix": "Unix Timestamp",
-  "output.weekday": "Weekday",
-  "output.timezone": "Timezone",
-
-  "format.unix.seconds": "Unix Seconds Timestamp",
-  "format.unix.milliseconds": "Unix Milliseconds Timestamp",
-  "format.unix.microseconds": "Unix Microseconds Timestamp",
-  "format.unix.nanoseconds": "Unix Nanoseconds Timestamp",
-  "format.rfc3339": "RFC3339 Format",
-  "format.rfc3339.nano": "RFC3339Nano Format",
-  "format.datetime": "DateTime Format",
-  "format.date": "Date Format",
-  "format.time": "Time Format",
-  "format.unknown": "Unknown Format",
-
-  "weekday.sunday": "Sunday",
-  "weekday.monday": "Monday",
-  "weekday.tuesday": "Tuesday",
-  "weekday.wednesday": "Wednesday",
-  "weekday.thursday": "Thursday",
-  "weekday.friday": "Friday",
-  "weekday.saturday": "Saturday",
-  "weekday.unknown": "Unknown"
-}
+[
+  {
+    "id": "cmd.root.short",
+    "translation": "A powerful timestamp conversion tool"
+  },
+  {
+    "id": "cmd.root.long",
+    "translation": "timestamp is a feature-rich timestamp conversion tool that supports:\n\n• Automatic detection of multiple time formats\n• Unix timestamps (seconds/milliseconds/microseconds/nanoseconds)\n• RFC3339, ISO8601 and other standard formats\n• Custom format conversion\n• Timezone support\n• Relative time calculations"
+  },
+  {
+    "id": "cmd.now.short",
+    "translation": "Show current time in various formats"
+  },
+  {
+    "id": "cmd.now.long",
+    "translation": "Display current time in various formats including Unix timestamps and common date-time formats\n\nSupported relative time offsets:\n- s: seconds (e.g., +30s, -10s)\n- m: minutes (e.g., +5m, -15m)\n- h: hours (e.g., +2h, -3h)\n- d: days (e.g., +1d, -7d)\n- w: weeks (e.g., +1w, -2w)\n- M: months (e.g., +1M, -6M)\n- y: years (e.g., +1y, -2y)"
+  },
+  {
+    "id": "cmd.completion.short",
+    "translation": "Generate auto-completion scripts"
+  },
+  {
+    "id": "cmd.completion.long",
+    "translation": "Generate auto-completion script for the specified shell"
+  },
+  {
+    "id": "flag.timezone",
+    "translation": "Specify timezone (e.g., UTC, Asia/Taipei)"
+  },
+  {
+    "id": "flag.offset",
+    "translation": "Time offset (e.g., +1d, -1w, +2M)"
+  },
+  {
+    "id": "flag.json",
+    "translation": "Output in JSON format"
+  },
+  {
+    "id": "flag.input.format",
+    "translation": "Specify input format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)"
+  },
+  {
+    "id": "flag.output.format",
+    "translation": "Specify output format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)"
+  },
+  {
+    "id": "flag.language",
+    "translation": "Language setting (en, zh-TW, zh-CN, ja)"
+  }
+]

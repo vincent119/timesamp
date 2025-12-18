@@ -3,6 +3,8 @@ package cmd
 import (
 	"os"
 
+	"timestamp/internal/i18n"
+
 	"github.com/spf13/cobra"
 )
 
@@ -31,4 +33,14 @@ var completionCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(completionCmd)
+
+	// 在 PersistentPreRun 後更新 completion 命令描述
+	originalPreRun := completionCmd.PreRun
+	completionCmd.PreRun = func(cmd *cobra.Command, args []string) {
+		completionCmd.Short = i18n.T("cmd.completion.short")
+		completionCmd.Long = i18n.T("cmd.completion.long")
+		if originalPreRun != nil {
+			originalPreRun(cmd, args)
+		}
+	}
 }

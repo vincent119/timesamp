@@ -37,15 +37,17 @@ func Init() error {
 	// 載入所有語言檔案
 	for _, lang := range SupportedLanguages {
 		fileName := fmt.Sprintf("locales/%s/messages.json", lang)
-		fmt.Println(fileName)
 		data, err := localeFS.ReadFile(fileName)
 		if err != nil {
 			continue
 		}
 
-		_, err = bundle.ParseMessageFileBytes(data, fileName)
+		// 使用包含語言標籤的假檔案名稱，讓 go-i18n 能正確識別語言
+		// 例如: messages.zh-TW.json
+		fakeFileName := fmt.Sprintf("messages.%s.json", lang)
+		_, err = bundle.ParseMessageFileBytes(data, fakeFileName)
 		if err != nil {
-			fmt.Printf("Warning: Failed to load language file %s: %v\n", fileName, err)
+			continue
 		}
 	}
 
@@ -58,14 +60,12 @@ func Init() error {
 func DetectLanguage() string {
 	// 1. 檢查環境變數 TIMESTAMP_LANG
 	if lang := os.Getenv("TIMESTAMP_LANG"); lang != "" {
-		fmt.Println(lang)
 		return normalizeLanguage(lang)
 	}
 
 	// 2. 檢查標準語言環境變數
 	for _, env := range []string{"LC_ALL", "LC_MESSAGES", "LANG"} {
 		if lang := os.Getenv(env); lang != "" {
-			fmt.Println(lang)
 			return normalizeLanguage(lang)
 		}
 	}
@@ -79,14 +79,14 @@ func normalizeLanguage(lang string) string {
 	// 解析語言標籤 (如: zh_TW.UTF-8 -> zh-TW)
 	lang = strings.Split(lang, ".")[0]
 	lang = strings.Replace(lang, "_", "-", -1)
-	
+
 	// 檢查是否支援
 	for _, supported := range SupportedLanguages {
 		if strings.HasPrefix(lang, supported) || strings.HasPrefix(supported, lang) {
 			return supported
 		}
 	}
-	
+
 	// 特殊處理中文
 	if strings.HasPrefix(lang, "zh") {
 		if strings.Contains(lang, "TW") || strings.Contains(lang, "HK") || strings.Contains(lang, "MO") {
@@ -94,7 +94,7 @@ func normalizeLanguage(lang string) string {
 		}
 		return "zh-CN"
 	}
-	
+
 	return "en"
 }
 

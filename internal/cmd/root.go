@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"timestamp/internal/converter"
+	"timestamp/internal/i18n"
 
 	"github.com/spf13/cobra"
 )
@@ -17,6 +18,7 @@ var (
 	timezone       string
 	inputTimestamp string
 	jsonOutput     bool
+	langFlag       string
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -53,6 +55,11 @@ Examples:
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 func Execute() {
+	// 在執行前處理語言設定
+	if langFlag != "" {
+		i18n.SetLanguage(langFlag)
+	}
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
@@ -60,14 +67,34 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&inputFormat, "input-format", "i", "", 
+	rootCmd.PersistentFlags().StringVarP(&inputFormat, "input-format", "i", "",
 		"Specify input format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)")
-	rootCmd.PersistentFlags().StringVarP(&outputFormat, "output-format", "o", "datetime", 
+	rootCmd.PersistentFlags().StringVarP(&outputFormat, "output-format", "o", "datetime",
 		"Specify output format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)")
-	rootCmd.PersistentFlags().StringVarP(&timezone, "timezone", "z", "", 
+	rootCmd.PersistentFlags().StringVarP(&timezone, "timezone", "z", "",
 		"Specify timezone (e.g., UTC, Asia/Taipei)")
-	rootCmd.Flags().BoolVarP(&jsonOutput, "json", "j", false, 
+	rootCmd.Flags().BoolVarP(&jsonOutput, "json", "j", false,
 		"Output in JSON format")
+
+	// 添加語言設定 flag
+	rootCmd.PersistentFlags().StringVarP(&langFlag, "lang", "l", "",
+		"Language (en, zh-TW, zh-CN, ja)")
+
+	// 添加語言 flag 的自動補全
+	rootCmd.RegisterFlagCompletionFunc("lang", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{"en", "zh-TW", "zh-CN", "ja"}, cobra.ShellCompDirectiveDefault
+	})
+
+	// 在 ParseFlags 之後更新命令描述
+	originalHelpFunc := rootCmd.HelpFunc()
+	rootCmd.SetHelpFunc(func(cmd *cobra.Command, args []string) {
+		// 從 flag 中取得語言設定
+		if flag := cmd.Flag("lang"); flag != nil && flag.Value.String() != "" {
+			i18n.SetLanguage(flag.Value.String())
+		}
+		updateCommandDescriptions()
+		originalHelpFunc(cmd, args)
+	})
 
 	// 設定 flag 自動完成
 	rootCmd.RegisterFlagCompletionFunc("timezone", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
@@ -155,7 +182,7 @@ func parseInputFormat(format string) (converter.TimestampFormat, error) {
 func outputText(result *converter.ConvertResult) {
 	fmt.Printf("Original Input: %s\n", result.Original)
 	fmt.Printf("Detected Format: %s\n", result.DetectedFormat)
-	
+
 	// 根據輸出格式選擇顯示
 	switch outputFormat {
 	case "unix":
@@ -177,7 +204,7 @@ func outputText(result *converter.ConvertResult) {
 	default: // datetime
 		fmt.Printf("Converted: %s\n", result.DateTime)
 	}
-	
+
 	fmt.Printf("Unix Timestamp: %d\n", result.UnixSeconds)
 	fmt.Printf("Weekday: %s\n", result.Weekday)
 	fmt.Printf("Timezone: %s\n", result.Timezone)
@@ -186,4 +213,28 @@ func outputText(result *converter.ConvertResult) {
 func outputJSON(result *converter.ConvertResult) {
 	jsonData, _ := json.MarshalIndent(result, "", "  ")
 	fmt.Println(string(jsonData))
+}
+
+// updateCommandDescriptions 更新命令描述為當前語言
+func updateCommandDescriptions() {
+	// 更新 root 命令
+	rootCmd.Short = i18n.T("cmd.root.short")
+	rootCmd.Long = i18n.T("cmd.root.long")
+
+	// 更新 flag 使用說明
+	if flag := rootCmd.PersistentFlags().Lookup("timezone"); flag != nil {
+		flag.Usage = i18n.T("flag.timezone")
+	}
+	if flag := rootCmd.PersistentFlags().Lookup("input-format"); flag != nil {
+		flag.Usage = i18n.T("flag.input.format")
+	}
+	if flag := rootCmd.PersistentFlags().Lookup("output-format"); flag != nil {
+		flag.Usage = i18n.T("flag.output.format")
+	}
+	if flag := rootCmd.Flags().Lookup("json"); flag != nil {
+		flag.Usage = i18n.T("flag.json")
+	}
+	if flag := rootCmd.PersistentFlags().Lookup("lang"); flag != nil {
+		flag.Usage = i18n.T("flag.language")
+	}
 }

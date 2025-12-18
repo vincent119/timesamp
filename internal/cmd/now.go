@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"timestamp/internal/converter"
+	"timestamp/internal/i18n"
 
 	"github.com/spf13/cobra"
 )
@@ -22,7 +23,7 @@ var nowCmd = &cobra.Command{
 
 Supported relative time offsets:
 - s: seconds (e.g., +30s, -10s)
-- m: minutes (e.g., +5m, -15m)  
+- m: minutes (e.g., +5m, -15m)
 - h: hours (e.g., +2h, -3h)
 - d: days (e.g., +1d, -7d)
 - w: weeks (e.g., +1w, -2w)
@@ -41,7 +42,20 @@ Examples:
 func init() {
 	rootCmd.AddCommand(nowCmd)
 	nowCmd.Flags().StringVar(&timeOffset, "offset", "", "Time offset (e.g., +1d, -1w, +2M)")
-	
+
+	// 在 PersistentPreRun 後更新 now 命令描述
+	originalPreRun := nowCmd.PreRun
+	nowCmd.PreRun = func(cmd *cobra.Command, args []string) {
+		nowCmd.Short = i18n.T("cmd.now.short")
+		nowCmd.Long = i18n.T("cmd.now.long")
+		if flag := nowCmd.Flags().Lookup("offset"); flag != nil {
+			flag.Usage = i18n.T("flag.offset")
+		}
+		if originalPreRun != nil {
+			originalPreRun(cmd, args)
+		}
+	}
+
 	// 添加 offset 參數的自動補全建議
 	nowCmd.RegisterFlagCompletionFunc("offset", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
@@ -84,28 +98,28 @@ func showCurrentTime(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return fmt.Errorf("failed to create converter: %v", err)
 	}
-	
+
 	now := time.Now().In(conv.Location)
-	
+
 	// 處理時間偏移
 	if timeOffset != "" {
 		now, err = conv.AddTimeOffset(now, timeOffset)
 		if err != nil {
-			return fmt.Errorf("time offset calculation failed: %v", err)
+			return fmt.Errorf(i18n.T("error.time.offset")+": %v", err)
 		}
 	}
-	
+
 	// 轉換時間
 	result, err := conv.Convert(fmt.Sprintf("%d", now.Unix()), nil)
 	if err != nil {
 		return fmt.Errorf("conversion failed: %v", err)
 	}
-	
+
 	if jsonOutput {
 		outputJSON(result)
 	} else {
 		outputText(result)
 	}
-	
+
 	return nil
 }
