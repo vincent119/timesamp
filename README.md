@@ -317,7 +317,7 @@ $ ./timestamp "2022-01-21 12:00:34" --output-format rfc3339
 
 ## 專案結構
 
-```
+```bash
 timestamp/
 ├── cmd/
 │   └── main.go              # 主程式入口
