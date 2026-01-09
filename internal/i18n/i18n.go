@@ -16,8 +16,8 @@ import (
 var localeFS embed.FS
 
 var (
-	bundle    *i18n.Bundle
-	localizer *i18n.Localizer
+	bundle      *i18n.Bundle
+	localizer   *i18n.Localizer
 	currentLang string
 )
 

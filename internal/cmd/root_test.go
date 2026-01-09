@@ -75,7 +75,7 @@ func TestRootCmd_UnixTimestamp(t *testing.T) {
 			contains: []string{
 				"Original Input: 1642781234",
 				"Detected Format: Unix 秒級時間戳", // 假設這是在中文環境下，或預設環境
-				"Converted: 2022-01-2", // 部分匹配日期
+				"Converted: 2022-01-2",        // 部分匹配日期
 			},
 		},
 		{
@@ -159,7 +159,6 @@ func TestNowCmd(t *testing.T) {
 		})
 	}
 }
-
 
 // executeCommandC 是一個輔助函數，用來正確地執行 Cobra 命令並捕獲輸出
 func executeCommandC(args ...string) (string, error) {

@@ -10,9 +10,9 @@ import (
 
 // completionCmd 自動補全命令
 var completionCmd = &cobra.Command{
-	Use:   "completion [bash|zsh|fish|powershell]",
-	Short: "Generate auto-completion scripts", // 預設英文，將在 UpdateCommandDescriptions 中更新
-	Long:  "Generate auto-completion scripts", // 預設英文，將在 UpdateCommandDescriptions 中更新
+	Use:                   "completion [bash|zsh|fish|powershell]",
+	Short:                 "Generate auto-completion scripts", // 預設英文，將在 UpdateCommandDescriptions 中更新
+	Long:                  "Generate auto-completion scripts", // 預設英文，將在 UpdateCommandDescriptions 中更新
 	DisableFlagsInUseLine: true,
 	ValidArgs:             []string{"bash", "zsh", "fish", "powershell"},
 	Args:                  cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
