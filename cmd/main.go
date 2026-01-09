@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"timestamp/internal/cmd"
-	"timestamp/internal/i18n"
+	"github.com/vincent119/timesamp/internal/cmd"
+	"github.com/vincent119/timesamp/internal/i18n"
 )
 
 func main() {

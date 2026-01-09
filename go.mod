@@ -1,4 +1,4 @@
-module timestamp
+module github.com/vincent119/timesamp
 
 go 1.23.0
 

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"timestamp/internal/converter"
-	"timestamp/internal/i18n"
+	"github.com/vincent119/timesamp/internal/converter"
+	"github.com/vincent119/timesamp/internal/i18n"
 
 	"github.com/spf13/cobra"
 )

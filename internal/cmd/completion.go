@@ -3,7 +3,7 @@ package cmd
 import (
 	"os"
 
-	"timestamp/internal/i18n"
+	"github.com/vincent119/timesamp/internal/i18n"
 
 	"github.com/spf13/cobra"
 )
