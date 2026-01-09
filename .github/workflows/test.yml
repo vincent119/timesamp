@@ -1,0 +1,49 @@
+name: Test and Coverage
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Test and Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - name: Run Tests
+        run: |
+          go test -v -coverprofile=coverage.out ./...
+          go tool cover -func=coverage.out -o=coverage.txt
+
+      - name: Parse Coverage
+        id: coverage
+        run: |
+          # Extract total coverage percentage
+          TOTAL_COVERAGE=$(grep "total:" coverage.txt | awk '{print $3}' | sed 's/%//')
+          echo "COVERAGE=$TOTAL_COVERAGE" >> $GITHUB_ENV
+          echo "Coverage is $TOTAL_COVERAGE%"
+
+      # Update Coverage Badge - using Dynamic Badges
+      # Requires GIST_SECRET and GIST_ID in repository secrets
+      - name: Create Coverage Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        continue-on-error: true # Don't fail if secrets are missing
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: ${{ secrets.GIST_ID }}
+          filename: timestamp-coverage.json
+          label: coverage
+          message: ${{ env.COVERAGE }}%
+          valColorRange: ${{ env.COVERAGE }}
+          maxColorRange: 100
+          minColorRange: 0

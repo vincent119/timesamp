@@ -1,5 +1,12 @@
 # Timestamp 轉換工具 / Timestamp Conversion Tool
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/vincent119/timesamp)](https://goreportcard.com/report/github.com/vincent119/timesamp)
+[![Test and Coverage](https://github.com/vincent119/timesamp/actions/workflows/test.yml/badge.svg)](https://github.com/vincent119/timesamp/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Coverage](https://img.shields.io/badge/dynamic/json?url=https://gist.githubusercontent.com/vincent119/a39b04471ae0598ac995ad643544d444/raw/timestamp-coverage.json&query=$.message&label=coverage)
+
+<!-- Note: To enable the coverage badge, please replace <USER> and <GIST_ID> with your GitHub username and the Gist ID created by the action. -->
+
 [繁體中文](#繁體中文) | [English](#english)
 
 ## 繁體中文

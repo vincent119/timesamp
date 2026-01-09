@@ -73,7 +73,7 @@ func init() {
 		"Specify output format (unix, unix-ms, unix-us, unix-ns, rfc3339, rfc3339-nano, datetime, date, time)")
 	rootCmd.PersistentFlags().StringVarP(&timezone, "timezone", "z", "",
 		"Specify timezone (e.g., UTC, Asia/Taipei)")
-	rootCmd.Flags().BoolVarP(&jsonOutput, "json", "j", false,
+	rootCmd.PersistentFlags().BoolVarP(&jsonOutput, "json", "j", false,
 		"Output in JSON format")
 
 	// 添加語言設定 flag
