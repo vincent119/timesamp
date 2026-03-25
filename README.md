@@ -33,6 +33,13 @@
 
 ## 安裝
 
+### 使用 Homebrew 安裝 (macOS / Linux)
+
+```bash
+brew tap vincent119/homebrew-tap
+brew install timesamp
+```
+
 ### 從原始碼編譯
 
 ```bash
@@ -468,6 +475,13 @@ A CLI tool developed using Go and the Cobra framework for timestamp conversion, 
 - Time format (HH:MM:SS)
 
 ### Installation
+
+#### Install via Homebrew (macOS / Linux)
+
+```bash
+brew tap vincent119/homebrew-tap
+brew install timesamp
+```
 
 #### Build from Source
 
