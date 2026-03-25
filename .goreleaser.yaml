@@ -11,6 +11,7 @@ builds:
       - amd64
       - arm64
     main: ./cmd
+    binary: timestamp
 brews:
   - repository:
       owner: vincent119
